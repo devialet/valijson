@@ -36,8 +36,15 @@ target_include_directories(valijson INTERFACE
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 if(valijson_INSTALL_HEADERS)
-    install(DIRECTORY include/ DESTINATION include)
+    install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
+
+install(TARGETS valijson
+    EXPORT valijsonConfig
+    DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+install(EXPORT valijsonConfig
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/valijson")
 
 if(NOT valijson_BUILD_TESTS AND NOT valijson_BUILD_EXAMPLES)
     return()
